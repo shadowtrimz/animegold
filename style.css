@@ -1,4 +1,4 @@
-/* Global page styling */
+/* Full page layout */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -6,28 +6,32 @@ body {
   display: flex;
   justify-content: center; /* center horizontally */
   align-items: center;     /* center vertically */
-  background: linear-gradient(to right, #6a82fb, #fc5c7d); /* anime-style gradient */
+  background: linear-gradient(to right, #6a82fb, #fc5c7d); /* gradient background */
   color: #fff;
   text-shadow: 1px 1px 3px #000;
 }
 
-/* Login box */
-.login-container {
+/* Container for login/signup */
+.auth-container {
   background: rgba(0,0,0,0.7);
   padding: 40px;
   border-radius: 12px;
-  width: 350px; /* bigger box */
+  width: 400px; /* bigger box */
   text-align: center;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
 
-.login-container h1 {
+.auth-container h1 {
   margin-bottom: 20px;
   font-size: 28px;
 }
 
-/* Inputs */
-.login-container input {
+/* Forms */
+form {
+  margin: 20px 0;
+}
+
+form input {
   width: 100%;
   padding: 12px;
   margin: 10px 0;
@@ -36,8 +40,7 @@ body {
   font-size: 16px;
 }
 
-/* Buttons */
-.login-container button {
+form button {
   width: 100%;
   padding: 12px;
   background: #ffcc00;
@@ -49,7 +52,7 @@ body {
   font-size: 16px;
 }
 
-.login-container button:hover {
+form button:hover {
   background: #ffd633;
   box-shadow: 0 0 10px #ffcc00;
 }
