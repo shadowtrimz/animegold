@@ -2,70 +2,63 @@ import { getAuth, signOut, onAuthStateChanged }
   from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 import { initializeApp } 
   from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } 
+import { getFirestore, doc, getDoc, updateDoc, increment } 
   from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAYrkIW7QvwJJN3DsfbXu7PW-oQoIdrDx0",
-  authDomain: "animegold-24f7b.firebaseapp.com",
-  projectId: "animegold-24f7b",
-  storageBucket: "animegold-24f7b.firebasestorage.app",
-  messagingSenderId: "985670643758",
-  appId: "1:985670643758:web:12375774edc9dd02a92fbf",
-  measurementId: "G-S3F2WP5L3W"
-};
-
+const firebaseConfig = { /* your Firebase config */ };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
 const pointsDisplay = document.getElementById("points");
 const claimSeriesBtn = document.getElementById("claimSeriesBtn");
+const convertBtn = document.getElementById("convertBtn");
 
-// Protect earn page and load points
+// Protect page
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
     window.location.href = "index.html";
   } else {
     const userRef = doc(db, "users", user.uid);
     const snap = await getDoc(userRef);
-    if (!snap.exists()) {
-      await setDoc(userRef, { points: 0 });
-      pointsDisplay.textContent = 0;
-    } else {
-      pointsDisplay.textContent = snap.data().points;
-    }
-
-    // Start timer once user is confirmed
-    setTimeout(() => {
-      claimSeriesBtn.disabled = false;
-      alert("You have watched for 5 seconds! You can now claim your point.");
-    }, 5000);
-  }
-});
-
-// Claim points logic (outside onAuthStateChanged so it only attaches once)
-claimSeriesBtn.addEventListener("click", async () => {
-  if (!claimSeriesBtn.disabled && auth.currentUser) {
-    const userRef = doc(db, "users", auth.currentUser.uid);
-
-    await updateDoc(userRef, { points: increment(1) });
-
-    const updatedSnap = await getDoc(userRef);
-    pointsDisplay.textContent = updatedSnap.data().points;
-
-    alert("You earned 1 point!");
-    claimSeriesBtn.disabled = true;
-
-    // Reset timer for next claim
-    setTimeout(() => {
-      claimSeriesBtn.disabled = false;
-      alert("Another 5 seconds completed! You can claim again.");
-    }, 5000);
+    pointsDisplay.textContent = snap.exists() ? snap.data().points : 0;
   }
 });
 
 // Logout
 document.getElementById("logoutBtn").addEventListener("click", () => {
   signOut(auth).then(() => window.location.href = "index.html");
+});
+
+// Earn points after 5 seconds
+const watchTime = 5000;
+setTimeout(() => {
+  claimSeriesBtn.disabled = false;
+  alert("You can now claim your point!");
+}, watchTime);
+
+claimSeriesBtn.addEventListener("click", async () => {
+  const user = auth.currentUser;
+  const userRef = doc(db, "users", user.uid);
+  await updateDoc(userRef, { points: increment(1) });
+  const updatedSnap = await getDoc(userRef);
+  pointsDisplay.textContent = updatedSnap.data().points;
+  alert("You earned 1 point!");
+  claimSeriesBtn.disabled = true;
+});
+
+// Convert points
+convertBtn.addEventListener("click", async () => {
+  const user = auth.currentUser;
+  const userRef = doc(db, "users", user.uid);
+  const snap = await getDoc(userRef);
+  const currentPoints = snap.data().points;
+
+  if (currentPoints >= 10) {
+    await updateDoc(userRef, { points: currentPoints - 10 });
+    pointsDisplay.textContent = currentPoints - 10;
+    alert("You converted 10 points into a reward!");
+  } else {
+    alert("Not enough points to convert.");
+  }
 });
