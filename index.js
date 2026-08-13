@@ -27,7 +27,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    window.location.href = "earn.html";
+    window.location.href = "earn.html"; // ✅ redirect to earn.html
   } catch (error) {
     alert(error.message);
   }
@@ -48,7 +48,7 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
       points: 0
     });
 
-    window.location.href = "earn.html";
+    window.location.href = "earn.html"; // ✅ redirect to earn.html
   } catch (error) {
     alert(error.message);
   }
