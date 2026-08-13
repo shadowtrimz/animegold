@@ -1,8 +1,9 @@
+/* Global page styling */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(to right, #6a82fb, #fc5c7d);
+  background: linear-gradient(to right, #6a82fb, #fc5c7d); /* anime-style gradient */
   color: #fff;
   text-shadow: 1px 1px 3px #000;
 }
@@ -10,6 +11,7 @@ body {
 /* Navigation bar */
 .nav-bar {
   margin-bottom: 20px;
+  text-align: center;
 }
 .nav-bar a, .nav-bar button {
   margin: 0 10px;
@@ -20,25 +22,15 @@ body {
   border-radius: 6px;
   border: none;
   cursor: pointer;
+  font-weight: bold;
 }
 .nav-bar a:hover, .nav-bar button:hover {
   background: #ffd633;
   box-shadow: 0 0 8px #ffcc00;
 }
 
-/* Login */
-.auth-container {
-  background: rgba(0,0,0,0.7);
-  padding: 40px;
-  border-radius: 12px;
-  width: 400px;
-  margin: 100px auto;
-  text-align: center;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
-}
-
-/* Dashboard */
-.dashboard-container {
+/* Unified Earn/Dashboard container */
+.earn-container {
   max-width: 800px;
   margin: 40px auto;
   text-align: center;
@@ -48,15 +40,9 @@ body {
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
 
-/* Earn */
-.earn-container {
-  max-width: 700px;
-  margin: 40px auto;
-  text-align: center;
-  background: rgba(0,0,0,0.6);
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+/* Section spacing */
+.convert-section, .earn-section {
+  margin: 30px 0;
 }
 
 /* Points box */
@@ -80,8 +66,18 @@ button {
   font-weight: bold;
   margin: 10px;
   transition: 0.3s;
+  font-size: 16px;
 }
 button:hover {
   background: #ffd633;
   box-shadow: 0 0 10px #ffcc00;
+}
+
+/* Headings */
+h1.title {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+h2 {
+  margin-bottom: 15px;
 }
