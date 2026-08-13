@@ -4,7 +4,7 @@ import { getAuth, signOut, onAuthStateChanged }
 import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } 
   from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyAYrkIW7QvwJJN3DsfbXu7PW-oQoIdrDx0",
   authDomain: "animegold-24f7b.firebaseapp.com",
@@ -23,6 +23,7 @@ const pointsDisplay = document.getElementById("points");
 const claimSeriesBtn = document.getElementById("claimSeriesBtn");
 const convertBtn = document.getElementById("convertBtn");
 const logoutBtn = document.getElementById("logoutBtn");
+const noticeBox = document.getElementById("noticeBox");
 
 // Protect page
 onAuthStateChanged(auth, async (user) => {
@@ -46,19 +47,24 @@ logoutBtn.addEventListener("click", () => {
   signOut(auth).then(() => window.location.href = "index.html");
 });
 
-// Earn points after 5 seconds
+// Enable claim button after 5 seconds
 setTimeout(() => {
   claimSeriesBtn.disabled = false;
 }, 5000);
 
+// Claim points
 claimSeriesBtn.addEventListener("click", async () => {
   const user = auth.currentUser;
   const userRef = doc(db, "users", user.uid);
+
   await updateDoc(userRef, { points: increment(1) });
   const updatedSnap = await getDoc(userRef);
+
   pointsDisplay.textContent = updatedSnap.data().points;
   claimSeriesBtn.disabled = true;
-  alert("You earned 1 point!");
+
+  // ✅ Show styled notice instead of alert
+  noticeBox.textContent = "🎉 You earned 1 point!";
 });
 
 // Convert points
@@ -71,8 +77,8 @@ convertBtn.addEventListener("click", async () => {
   if (currentPoints >= 10) {
     await updateDoc(userRef, { points: currentPoints - 10 });
     pointsDisplay.textContent = currentPoints - 10;
-    alert("You converted 10 points into a reward!");
+    noticeBox.textContent = "✅ You converted 10 points into a reward!";
   } else {
-    alert("Not enough points to convert.");
+    noticeBox.textContent = "⚠️ Not enough points to convert.";
   }
 });
