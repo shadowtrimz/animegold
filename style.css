@@ -1,40 +1,26 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  background: #f5f5f5;
   margin: 0;
   padding: 20px;
-}
-
-h1.title {
-  color: #333;
-}
-
-.points-box {
-  background: #fff;
-  border: 1px solid #ccc;
-  display: inline-block;
-  padding: 10px 20px;
-  margin: 20px 0;
-  font-size: 18px;
-}
-
-button {
-  margin: 10px;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-body {
   background: linear-gradient(to right, #ff758c, #ff7eb3, #6a82fb, #fc5c7d);
   color: #fff;
   text-shadow: 1px 1px 3px #000;
 }
+
+h1.title {
+  color: #fff; /* matches gradient theme */
+}
+
 .points-box {
   background: rgba(0,0,0,0.6);
-  padding: 15px;
+  padding: 15px 25px;
   border-radius: 10px;
   display: inline-block;
+  font-size: 18px;
+  margin: 20px 0;
 }
+
 button {
   background: #ffcc00;
   border: none;
@@ -42,8 +28,10 @@ button {
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
+  margin: 10px;
   transition: 0.3s;
 }
+
 button:hover {
   background: #ffd633;
   box-shadow: 0 0 10px #ffcc00;
