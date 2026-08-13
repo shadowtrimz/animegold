@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AnimeGold Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <h1>Account Dashboard</h1>
+
+    <!-- Points Display -->
+    <div class="points-box">
+      Current Points: <span id="points">0</span>
+    </div>
+
+    <!-- Convert Points -->
+    <div class="convert-section">
+      <h2>Convert Points</h2>
+      <button id="convertBtn">Convert to Reward</button>
+    </div>
+
+    <!-- Earn by Watching -->
+    <div class="earn-section">
+      <h2>Watch Videos to Earn</h2>
+      <iframe 
+        src="https://trimz.tv/99-reinforced-wooden-stick" 
+        style="width: 100%; max-width: 640px; height: 360px;" 
+        frameborder="0" 
+        allow="autoplay; fullscreen" 
+        allowfullscreen>
+      </iframe>
+      <button id="claimSeriesBtn" disabled>Claim Points</button>
+    </div>
+
+    <!-- Logout -->
+    <button id="logoutBtn">Logout</button>
+  </div>
+
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>
