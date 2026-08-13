@@ -36,41 +36,40 @@ onAuthStateChanged(auth, async (user) => {
     } else {
       pointsDisplay.textContent = snap.data().points;
     }
+
+    // Start timer only after user is confirmed
+    const watchTime = 5000; // 5 seconds for testing
+    setTimeout(() => {
+      console.log("Timer finished, enabling button");
+      claimSeriesBtn.disabled = false;
+      alert("You have watched for 5 seconds! You can now claim your point.");
+    }, watchTime);
+
+    // Claim points logic
+    claimSeriesBtn.addEventListener("click", async () => {
+      if (!claimSeriesBtn.disabled) {
+        console.log("Claim button clicked for UID:", user.uid);
+
+        await updateDoc(userRef, { points: increment(1) });
+
+        const updatedSnap = await getDoc(userRef);
+        pointsDisplay.textContent = updatedSnap.data().points;
+        console.log("Updated points:", updatedSnap.data().points);
+
+        alert("You earned 1 point!");
+        claimSeriesBtn.disabled = true;
+
+        // Reset timer for next claim
+        setTimeout(() => {
+          claimSeriesBtn.disabled = false;
+          alert("Another 5 seconds completed! You can claim again.");
+        }, watchTime);
+      }
+    });
   }
 });
 
 // Logout
 document.getElementById("logoutBtn").addEventListener("click", () => {
   signOut(auth).then(() => window.location.href = "index.html");
-});
-
-// 5 seconds watch time for testing
-const watchTime = 5000;
-
-setTimeout(() => {
-  claimSeriesBtn.disabled = false;
-  alert("You have watched for 5 seconds! You can now claim your point.");
-}, watchTime);
-
-claimSeriesBtn.addEventListener("click", async () => {
-  if (!claimSeriesBtn.disabled) {
-    const user = auth.currentUser;
-    const userRef = doc(db, "users", user.uid);
-
-    // Increment points in Firestore
-    await updateDoc(userRef, { points: increment(1) });
-
-    // Refresh display
-    const updatedSnap = await getDoc(userRef);
-    pointsDisplay.textContent = updatedSnap.data().points;
-
-    alert("You earned 1 point!");
-    claimSeriesBtn.disabled = true;
-
-    // Reset timer for next claim
-    setTimeout(() => {
-      claimSeriesBtn.disabled = false;
-      alert("Another 5 seconds completed! You can claim again.");
-    }, watchTime);
-  }
 });
