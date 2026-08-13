@@ -46,7 +46,7 @@ const pointsDisplay = document.getElementById("points");
 const claimSeriesBtn = document.getElementById("claimSeriesBtn");
 
 // 1 hour watch time (3600000 ms)
-const watchTime = 3600000;
+const watchTime = 5000;
 
 setTimeout(() => {
   claimSeriesBtn.disabled = false;
