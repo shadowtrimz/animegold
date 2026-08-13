@@ -4,7 +4,17 @@ import { getAuth, signOut, onAuthStateChanged }
 import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } 
   from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
-const firebaseConfig = { /* your Firebase config */ };
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAYrkIW7QvwJJN3DsfbXu7PW-oQoIdrDx0",
+  authDomain: "animegold-24f7b.firebaseapp.com",
+  projectId: "animegold-24f7b",
+  storageBucket: "animegold-24f7b.firebasestorage.app",
+  messagingSenderId: "985670643758",
+  appId: "1:985670643758:web:12375774edc9dd02a92fbf",
+  measurementId: "G-S3F2WP5L3W"
+};
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -25,7 +35,6 @@ onAuthStateChanged(auth, async (user) => {
     if (snap.exists()) {
       pointsDisplay.textContent = snap.data().points;
     } else {
-      // Create record if missing
       await setDoc(userRef, { email: user.email, points: 0 });
       pointsDisplay.textContent = 0;
     }
@@ -38,10 +47,9 @@ logoutBtn.addEventListener("click", () => {
 });
 
 // Earn points after 5 seconds
-const watchTime = 5000;
 setTimeout(() => {
   claimSeriesBtn.disabled = false;
-}, watchTime);
+}, 5000);
 
 claimSeriesBtn.addEventListener("click", async () => {
   const user = auth.currentUser;
