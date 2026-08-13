@@ -1,22 +1,20 @@
-/* Full page layout */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  height: 100vh; /* full screen height */
+  height: 100vh;
   display: flex;
-  justify-content: center; /* center horizontally */
-  align-items: center;     /* center vertically */
-  background: linear-gradient(to right, #6a82fb, #fc5c7d); /* gradient background */
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #6a82fb, #fc5c7d);
   color: #fff;
   text-shadow: 1px 1px 3px #000;
 }
 
-/* Container for login/signup */
 .auth-container {
   background: rgba(0,0,0,0.7);
   padding: 40px;
   border-radius: 12px;
-  width: 400px; /* bigger box */
+  width: 400px;
   text-align: center;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
@@ -26,7 +24,6 @@ body {
   font-size: 28px;
 }
 
-/* Forms */
 form {
   margin: 20px 0;
 }
