@@ -29,3 +29,22 @@ body {
   color: #fff;
   text-shadow: 1px 1px 3px #000;
 }
+.points-box {
+  background: rgba(0,0,0,0.6);
+  padding: 15px;
+  border-radius: 10px;
+  display: inline-block;
+}
+button {
+  background: #ffcc00;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+button:hover {
+  background: #ffd633;
+  box-shadow: 0 0 10px #ffcc00;
+}
