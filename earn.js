@@ -1,5 +1,4 @@
-import { initializeApp } 
-  from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 import { getAuth, signOut, onAuthStateChanged } 
   from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } 
@@ -45,4 +44,27 @@ setTimeout(() => {
 }, watchTime);
 
 claimSeriesBtn.addEventListener("click", async () => {
-  const user
+  const user = auth.currentUser;
+  const userRef = doc(db, "users", user.uid);
+  await updateDoc(userRef, { points: increment(1) });
+  const updatedSnap = await getDoc(userRef);
+  pointsDisplay.textContent = updatedSnap.data().points;
+  claimSeriesBtn.disabled = true;
+  alert("You earned 1 point!");
+});
+
+// Convert points
+convertBtn.addEventListener("click", async () => {
+  const user = auth.currentUser;
+  const userRef = doc(db, "users", user.uid);
+  const snap = await getDoc(userRef);
+  const currentPoints = snap.data().points;
+
+  if (currentPoints >= 10) {
+    await updateDoc(userRef, { points: currentPoints - 10 });
+    pointsDisplay.textContent = currentPoints - 10;
+    alert("You converted 10 points into a reward!");
+  } else {
+    alert("Not enough points to convert.");
+  }
+});
