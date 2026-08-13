@@ -39,6 +39,14 @@ onAuthStateChanged(auth, async (user) => {
       await setDoc(userRef, { email: user.email, points: 0 });
       pointsDisplay.textContent = 0;
     }
+
+    // ✅ Reset claim button state each time user logs in
+    claimSeriesBtn.disabled = true;
+    noticeBox.textContent = "⏳ Please wait 5 seconds...";
+    setTimeout(() => {
+      claimSeriesBtn.disabled = false;
+      noticeBox.textContent = "👉 You can now claim points!";
+    }, 5000);
   }
 });
 
@@ -47,13 +55,10 @@ logoutBtn.addEventListener("click", () => {
   signOut(auth).then(() => window.location.href = "index.html");
 });
 
-// Enable claim button after 5 seconds
-setTimeout(() => {
-  claimSeriesBtn.disabled = false;
-}, 5000);
-
-// Claim points
+// Claim points (attach listener ONCE)
 claimSeriesBtn.addEventListener("click", async () => {
+  if (claimSeriesBtn.disabled) return; // ✅ prevent double clicks
+
   const user = auth.currentUser;
   const userRef = doc(db, "users", user.uid);
 
@@ -61,9 +66,8 @@ claimSeriesBtn.addEventListener("click", async () => {
   const updatedSnap = await getDoc(userRef);
 
   pointsDisplay.textContent = updatedSnap.data().points;
-  claimSeriesBtn.disabled = true;
 
-  // ✅ Show styled notice instead of alert
+  claimSeriesBtn.disabled = true; // ✅ disable immediately
   noticeBox.textContent = "🎉 You earned 1 point!";
 });
 
