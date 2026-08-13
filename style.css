@@ -24,3 +24,8 @@ button {
   padding: 10px 20px;
   cursor: pointer;
 }
+body {
+  background: linear-gradient(to right, #ff758c, #ff7eb3, #6a82fb, #fc5c7d);
+  color: #fff;
+  text-shadow: 1px 1px 3px #000;
+}
