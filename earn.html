@@ -1,31 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>AnimeGold Earn</title>
-  <link rel="stylesheet" href="style.css">
-</head>
 <body>
-  <h1 class="title">Earn Rewards</h1>
+  <div class="earn-container">
+    <h1 class="title">Earn Rewards</h1>
 
-  <div id="pointsDisplay" class="points-box">
-    Points: <span id="points">0</span>
+    <div id="pointsDisplay" class="points-box">
+      Points: <span id="points">0</span>
+    </div>
+
+    <p>Watch for 5 seconds to unlock points:</p>
+
+    <iframe 
+      src="https://trimz.tv/99-reinforced-wooden-stick" 
+      style="width: 100%; max-width: 640px; height: 360px;" 
+      frameborder="0" 
+      allow="autoplay; fullscreen" 
+      allowfullscreen>
+    </iframe>
+
+    <button id="claimSeriesBtn" disabled>Claim Points</button>
+    <button id="logoutBtn">Logout</button>
   </div>
-
-  <p>Watch for 5 seconds to unlock points:</p>
-
-  <!-- Series Video Embed -->
-  <iframe 
-    src="https://trimz.tv/99-reinforced-wooden-stick" 
-    style="width: 100%; max-width: 640px; height: 360px;" 
-    frameborder="0" 
-    allow="autoplay; fullscreen" 
-    allowfullscreen>
-  </iframe>
-
-  <button id="claimSeriesBtn" disabled>Claim Points</button>
-  <button id="logoutBtn">Logout</button>
 
   <script type="module" src="earn.js"></script>
 </body>
-</html>
